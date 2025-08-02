@@ -3,14 +3,13 @@ import path from 'node:path'
 import { serveStatic } from './utils/serveStatic.js'
 
 
+
 const PORT = 8000
 
 const __dirname = import.meta.dirname
 
 const server = http.createServer(async (req, res) => {
-
-    const pathToResource = path.join(__dirname, 'public', 'index.html')
-    await serveStatic(__dirname, res)
+    await serveStatic(req, res, __dirname)
 
 })
 
