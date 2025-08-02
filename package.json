@@ -1,0 +1,24 @@
+{
+  "name": "gold-digger",
+  "version": "1.0.0",
+  "description": "A web app to buy gold ",
+  "main": "server.js",
+  "type": "module",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jeffreyykim/gold-digger.git"
+  },
+  "author": "Jeffrey Kim",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jeffreyykim/gold-digger/issues"
+  },
+  "homepage": "https://github.com/jeffreyykim/gold-digger#readme",
+  "devDependencies": {
+    "nodemon": "^3.1.10"
+  }
+}
