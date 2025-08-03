@@ -1,19 +1,13 @@
 import path from "node:path";
 import fs from "node:fs/promises";
-import { URL } from "node:url";
 import { sendResponse } from "./sendResponse.js";
 import { getContentType } from "./getContentType.js";
 
 export async function serveStatic(req, res, baseDir) {
   const publicDir = path.join(baseDir, "public");
-  
-  // Parse the URL to get just the pathname, removing query parameters
-  const url = new URL(req.url, `http://${req.headers.host}`);
-  const pathname = url.pathname;
-  
   const filePath = path.join(
     publicDir,
-    pathname === "/" ? "index.html" : pathname
+    req.url === "/" ? "index.html" : req.url
   );
   const ext = path.extname(filePath);
   const contentType = getContentType(ext);
@@ -21,8 +15,11 @@ export async function serveStatic(req, res, baseDir) {
     const content = await fs.readFile(filePath);
     sendResponse(res, 200, contentType, content);
   } catch (err) {
-    console.log(err);
-    // Send a 404 response when file is not found
-    sendResponse(res, 404, "text/html", "<h1>404 - File Not Found</h1>");
+    try {
+      const notFoundPage = await fs.readFile(path.join(publicDir, "404.html"));
+      sendResponse(res, 404, "text/html", notFoundPage);
+    } catch (read404Err) {
+      sendResponse(res, 404, "text/plain", "404 Not Found");
+    }
   }
 }
