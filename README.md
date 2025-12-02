@@ -1,4 +1,5 @@
 # GoldDigger
+Live Preview: 
 
 A web application for gold investment with live price tracking and simulated gold purchasing.
 
