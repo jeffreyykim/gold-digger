@@ -2,7 +2,7 @@ import http from 'node:http'
 import path from 'node:path'
 import { serveStatic } from './utils/serveStatic.js'
 
-const PORT = 8000
+const PORT = process.env.PORT || 8000
 const __dirname = import.meta.dirname
 
 function parseJSON(req) {
